@@ -13,7 +13,7 @@ public class BookingTest {
 
     @Before
     public void before(){
-        bedroom = new Bedroom(2, 2, RoomType.DOUBLE);
+        bedroom = new Bedroom(2, 2, RoomType.DOUBLE, 75.00);
         booking = new Booking(bedroom, 3);
     }
 
@@ -25,6 +25,11 @@ public class BookingTest {
     @Test
     public void bookingHasNumberOfNights(){
         assertEquals(3, booking.getNumberOfNights());
+    }
+
+    @Test
+    public void canCalculateTotalBill() {
+        assertEquals(225.00, booking.totalBill(), 0.0);
     }
 
 }

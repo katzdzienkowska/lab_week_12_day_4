@@ -12,6 +12,7 @@ public enum RoomType {
         this.numberOfBeds = numberOfBeds;
     }
 
-
-
+    public int getNumberOfBeds() {
+        return numberOfBeds;
+    }
 }
