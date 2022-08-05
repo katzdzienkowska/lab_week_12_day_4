@@ -13,7 +13,7 @@ public class BookingTest {
 
     @Before
     public void before(){
-        bedroom = new Bedroom(2, 2, RoomType.DOUBLE, 75.00);
+        bedroom = new Bedroom(2, RoomType.DOUBLE, 75.00);
         booking = new Booking(bedroom, 3);
     }
 

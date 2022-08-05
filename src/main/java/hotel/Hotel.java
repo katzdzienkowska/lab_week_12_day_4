@@ -1,9 +1,6 @@
 package hotel;
 
-import hotel.rooms.Bedroom;
-import hotel.rooms.ConferenceRoom;
-import hotel.rooms.DiningRoom;
-import hotel.rooms.Room;
+import hotel.rooms.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +9,8 @@ public class Hotel {
 
     private ArrayList<Bedroom> bedrooms;
     private ArrayList<ConferenceRoom> conferenceRooms;
+
+    //private ArrayList<Room> rooms; - we could have that as well - an array list with both bedrooms and conference rooms
 
     private HashMap<String, DiningRoom> diningRooms;
 
@@ -29,18 +28,15 @@ public class Hotel {
         return conferenceRooms;
     }
 
-    public void checkGuestIn(Guest guest, Bedroom bedroom) {
-        if (bedroom.getNumberOfGuests() < bedroom.getCapacity()) {
-            bedroom.addGuestToRoom(guest);
-        }
+    public int getNumberOfBedrooms() {
+        return bedrooms.size();
     }
 
-    public void checkGuestOut(Guest guest, Room room) {
-        if (room.getGuests().contains(guest)) {
-            room.removeGuestFromRoom(guest);
-        }
+    public int getNumberOfConferenceRooms() {
+        return conferenceRooms.size();
     }
 
+    // two methods below could be named both addRoom because we are passing different parameters
     public void addBedroom(Bedroom bedroom) {
         bedrooms.add(bedroom);
     }
@@ -49,12 +45,33 @@ public class Hotel {
         conferenceRooms.add(conferenceRoom);
     }
 
-    public int getNumberOfBedrooms() {
-        return bedrooms.size();
+    public void checkGuestInByRoom(Guest guest, Bedroom bedroom) {
+        if (bedrooms.contains(bedroom) && bedroom.getNumberOfGuests() < bedroom.getCapacity()) {
+            bedroom.addGuestToRoom(guest);
+        }
     }
 
-    public int getNumberOfConferenceRooms() {
-        return conferenceRooms.size();
+    public void checkGuestInByRoomType(Guest guest, RoomType roomType) {
+        for (Bedroom bedroom : bedrooms) {
+            if (bedroom.getRoomType() == roomType) {
+                bedroom.addGuestToRoom(guest);
+                return;
+            }
+        }
+    }
+
+//    public void checkGuestOut(Guest guest, Room room) {
+//        if (room.getGuests().contains(guest)) {
+//            room.removeGuestFromRoom(guest);
+//        }
+//    }
+
+    public void checkGuestOut(Guest guest) {
+        for (Bedroom bedroom : bedrooms) {
+            if (bedroom.getGuests().contains(guest)) {
+                bedroom.removeGuestFromRoom(guest);
+            }
+        }
     }
 
     public Booking bookRoom(Bedroom bedroom, int numberOfNights) {
@@ -70,5 +87,6 @@ public class Hotel {
     public int getNumberOfDiningRooms() {
         return diningRooms.size();
     }
+
 }
 

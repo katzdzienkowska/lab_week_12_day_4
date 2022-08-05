@@ -34,4 +34,7 @@ public abstract class Room {
         guests.remove(guest);
     }
 
+    public int guestCount() {
+        return guests.size();
+    }
 }
